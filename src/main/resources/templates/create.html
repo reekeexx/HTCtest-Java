@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Create</title>
+    <script>
+        function change(obj) {
+            var selectBox = obj;
+            var selected = selectBox.options[selectBox.selectedIndex].value;
+            var military = document.getElementById("military")
+
+            if(selected === 'F') {
+                military.style.display = "none"
+            } else {
+                military.style.display = "block"
+            }
+        }
+    </script>
+</head>
+<body>
+<form th:action="@{/create}" method="post">
+
+    <div align="center" th:object="${person}">
+        <h3>Личные данные</h3>
+        <label for="firstNamePerson"> Имя:
+            <input id="firstNamePerson" type="text" placeholder="Иван" th:field="*{firstName}" />
+            <font color="red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First name</font>
+        </label>
+        <br/>
+        <label for="lastNamePerson"> Фамилия:
+            <input id="lastNamePerson" type="text" placeholder="Иванов" th:field="*{lastName}" />
+            <font color="red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last name</font>
+        </label>
+        <br/>
+        <label for="patronymicPerson"> Отчество:
+            <input id="patronymicPerson" type="text" placeholder="Иванович" th:field="*{patronymic}" />
+        </label>
+        <br/>
+        <label for="personDate"> Дата рождения
+            <input id="personDate" type="date" min="1900-01-01" max="2020-01-01" th:field="*{date}" />
+            <font color="red" th:if="${#fields.hasErrors('date')}" th:errors="*{date}">Date</font>
+        </label>
+        <br/>
+        <label for="personSex"> Пол
+            <select id="personSex" name="sex" onchange="change(this)">
+                <option value="M">М</option>
+                <option value="F">Ж</option>
+            </select>
+        </label>
+        <br/>
+    </div>
+
+    <br/>
+
+    <div align="center" th:object="${passport}">
+        <h3>Паспорт</h3>
+        <label for="seriesPas"> Серия
+            <input id="seriesPas" type="text" placeholder="Серия" th:field="*{seriesPassport}" />
+            <font color="red" th:if="${#fields.hasErrors('seriesPassport')}" th:errors="*{seriesPassport}">Series</font>
+        </label>
+        <br/>
+        <label for="numberPas"> Номер
+            <input id="numberPas" type="text" placeholder="Номер" th:field="*{numberPassport}" />
+            <font color="red" th:if="${#fields.hasErrors('numberPassport')}" th:errors="*{numberPassport}">Number</font>
+        </label>
+        <br/>
+        <label for="datePas"> Дата выдачи
+            <input id="datePas" type="date" min="1900-01-01" max="2020-01-01" th:field="*{datePassport}" />
+        </label>
+        <br/>
+    </div>
+
+    <br/>
+
+    <div align="center" th:object="${snils}">
+        <h3>СНИЛС</h3>
+        <label for="numberSnils"> Номер
+            <input id="numberSnils" type="text" placeholder="Номер" th:field="*{numberSnils}" />
+        </label>
+        <br/>
+        <label for="dateSnils"> Дата выдачи
+            <input id="dateSnils" type="date" min="1900-01-01" max="2020-01-01" th:field="*{dateSnils}" />
+        </label>
+        <br/>
+    </div>
+
+    <br/>
+
+    <div align="center" th:object="${inn}">
+        <h3>ИНН</h3>
+        <label for="numberInn"> Номер
+            <input id="numberInn" type="text" placeholder="Номер" th:field="*{numberInn}" />
+        </label>
+        <br/>
+        <label for="dateInn"> Дата выдачи
+            <input id="dateInn" type="date" min="1900-01-01" max="2020-01-01" th:field="*{dateInn}" />
+        </label>
+        <br/>
+    </div>
+
+    <br/>
+
+    <div align="center" th:object="${driverLicense}">
+        <h3>Водительские права</h3>
+        <label for="numberDriver"> Номер
+            <input id="numberDriver" type="text" placeholder="Номер" th:field="*{numberDriverLicense}" />
+        </label>
+        <br/>
+        <label for="dateDriver"> Дата выдачи
+            <input id="dateDriver" type="date" min="1900-01-01" max="2020-01-01" th:field="*{dateDriverLicense}" />
+        </label>
+        <br/>
+    </div>
+
+    <br/>
+
+    <div id="military" align="center" th:object="${militaryId}">
+        <h3>Военный билет</h3>
+        <label for="numberMilitary"> Номер
+            <input id="numberMilitary" type="text" placeholder="Номер" th:field="*{numberMilitaryId}" />
+        </label>
+        <br/>
+        <label for="dateMilitary"> Дата выдачи
+            <input id="dateMilitary" type="date" min="1900-01-01" max="2020-01-01" th:field="*{dateMilitaryId}" />
+        </label>
+        <br/>
+    </div>
+
+    <br/>
+
+    <div align="center">
+        <button type="submit">Добавить</button>
+    </div>
+
+</form>
+</body>
+</html>
